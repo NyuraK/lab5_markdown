@@ -5,7 +5,7 @@ const Document = require('../models/document-model');
 router.post('/documents', (req, res) => {
     const post = new Document({
         title: req.body.title,
-        description: req.body.description,
+        text: req.body.text,
         creation: new Date(),
         modification: new Date()
     });
@@ -23,7 +23,7 @@ router.post('/documents', (req, res) => {
 })
 
 router.get('/documents', (req, res) => {
-    Document.find({}, 'title description creation modification', (err, documents) => {
+    Document.find({}, 'title text creation modification', (err, documents) => {
         if (err) {
             res.sendStatus(500)
         } else {
@@ -37,7 +37,7 @@ router.get('/documents', (req, res) => {
 })
 
 router.get('/documents/:id', (req, res) => {
-    Document.findById(req.params.id, 'title description creation modification', (err, document) => {
+    Document.findById(req.params.id, 'title text creation modification', (err, document) => {
         if (err) {
             res.sendStatus(500)
         } else {
@@ -47,7 +47,7 @@ router.get('/documents/:id', (req, res) => {
 })
 
 router.put('/posts/:id', (req, res) => {
-    Document.findById(req.params.id, 'title description creation modification', (err, document) => {
+    Document.findById(req.params.id, 'title text creation modification', (err, document) => {
         if (err) {
             console.log(err)
         } else {

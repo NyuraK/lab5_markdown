@@ -1,11 +1,9 @@
+/* eslint-disable */
 <template>
-  <b-container>
-    <b-form>
-      <b-form-input
-        type="text"
-        v-model="title"
-        requred
-        placeholder="Enter file name to save"/>
+  <div>
+    <Nav></Nav>
+    <br><br>
+    <div class="container">
       <b-row>
         <b-col>
           <h2 class="text-success text-center">Enter Markdown Text</h2>
@@ -16,16 +14,33 @@
           <div class="well well-sm pre-scrollable" v-html='previewText'></div>
         </b-col>
       </b-row>
-    </b-form>
-    <b-button type="submit" variant="primary" v-on:click="save">Save</b-button>
-  </b-container>
+      <br>
+      <b-row>
+        <b-col>
+          <b-form cols="2">
+            <b-form-input
+              type="text"
+              v-model="title"
+              requred
+              placeholder="Enter file name to save"/>
+          </b-form>
+        </b-col>
+        <b-col cols="10">
+          <b-button type="submit" variant="primary" v-on:click="save">Save</b-button>
+        </b-col>
+      </b-row>
+    </div>
+  </div>
 </template>
+
 <script>
   import DocumentService from "../service/PostService";
+  import Nav from './Nav'
 
   let marked = require('marked');
   export default {
     name: 'Markdown',
+    components: {Nav},
     data() {
       return {
         md_text: '# Title',
@@ -54,8 +69,8 @@
             title: this.title,
             text: this.md_text
           });
-          this.title ='';
-          this.md_text='';
+          this.title = '';
+          this.md_text = '';
         } else {
           alert("Empty fields!");
         }
