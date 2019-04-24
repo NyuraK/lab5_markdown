@@ -24,11 +24,9 @@
         </b-col>
         <b-col>
           <br><br>
-          <b-card>
-            <b-card-text>
-              {{openedFile}}
-            </b-card-text>
-          </b-card>
+          <textarea style="height:auto" rows="16" class='form-control' v-model='openedFile'></textarea>
+          <br>
+          <b-button variant="primary" v-on:click="saveChanges">Save changes</b-button>
         </b-col>
       </b-row>
 
@@ -62,35 +60,31 @@
     methods: {
       async getDocuments() {
         const response = await Service.fetchdocuments();
-        // let doc = {
-        //   _id: Number,
-        //   title: String,
-        //   creation: Date,
-        //   modification: Date
-        // };
-        // for (let i=0; i<temp.length; i++) {
-        //   doc._id = temp[i]._id;
-        //   doc.title = temp[i].title;
-        //   doc.creation = new Date(temp[i].creation);
-        //   doc.modification = new Date(temp[i].creation);
-        //   temp2.push(doc);
-        // }
         this.documents = response.data.documents;
       },
       rowSelected(item) {
-        this.selected = item[0]._id;
+        this.selected = item[0];
       },
 
       async open() {
         const response = await Service.getDocument({
-          id: this.selected
+          id: this.selected._id
         });
         this.openedFile = response.data.text;
       },
 
       async deleteDoc() {
-        await Service.deleteDocument(this.selected);
+        await Service.deleteDocument(this.selected._id);
         this.getDocuments();
+      },
+
+      async saveChanges() {
+        await Service.updateDocument({
+          id: this.selected._id,
+          title: this.selected.title,
+          text: this.openedFile
+        });
+        this.openedFile = '';
       }
 
     }

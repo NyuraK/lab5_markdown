@@ -46,16 +46,16 @@ router.get('/documents/:id', (req, res) => {
     })
 })
 
-router.put('/posts/:id', (req, res) => {
-    Document.findById(req.params.id, 'title text creation modification', (err, document) => {
+router.put('/documents/:id', (req, res) => {
+    Document.findById(req.params.id, 'title text', (err, document) => {
         if (err) {
             console.log(err)
         } else {
             if (req.body.title) {
                 document.title = req.body.title
             }
-            if (req.body.description) {
-                document.description = req.body.description
+            if (req.body.text) {
+                document.text = req.body.text
             }
             document.modification = new Date();
             document.save(err => {

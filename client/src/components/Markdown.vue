@@ -6,18 +6,18 @@
     <div class="container">
       <b-row>
         <b-col>
-          <h2 class="text-success text-center">Enter Markdown Text</h2>
+          <h2 class="text-center">Enter Markdown Text</h2>
           <textarea style="height:auto" rows="16" class='form-control' v-model='md_text'></textarea>
         </b-col>
         <b-col>
-          <h2 class="text-success text-center">Preview</h2>
+          <h2 class="text-center">Preview</h2>
           <div class="well well-sm pre-scrollable" v-html='previewText'></div>
         </b-col>
       </b-row>
       <br>
       <b-row>
         <b-col>
-          <b-form cols="2">
+          <b-form cols="3">
             <b-form-input
               type="text"
               v-model="title"
@@ -25,7 +25,7 @@
               placeholder="Enter file name to save"/>
           </b-form>
         </b-col>
-        <b-col cols="10">
+        <b-col cols="9">
           <b-button type="submit" variant="primary" v-on:click="save">Save</b-button>
         </b-col>
       </b-row>
