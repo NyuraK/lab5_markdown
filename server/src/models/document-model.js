@@ -5,15 +5,15 @@ const DocumentSchema = new Schema({
         type: String,
         unique: true
     },
-    description: {
+    text: {
         type: String
     },
-    creationDate: {
+    creation: {
         type: Date
     },
-    modificationDate: {
+    modification: {
         type: Date
     }
 });
-const DocumentModel = mongoose.model('posts', DocumentSchema);
+const DocumentModel = mongoose.model('documents', DocumentSchema);
 module.exports = DocumentModel;
