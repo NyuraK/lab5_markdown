@@ -94,7 +94,7 @@
       async saveChanges() {
         await Service.updateDocument({
           id: this.selected._id,
-          title: this.selected.title,
+          title: this.title,
           text: this.openedFile
         });
         this.openedFile = '';

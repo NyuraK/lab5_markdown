@@ -57,6 +57,7 @@ router.put('/documents/:id', (req, res) => {
             if (req.body.text) {
                 document.text = req.body.text
             }
+            document.title = req.body.title;
             document.modification = new Date();
             document.save(err => {
                 if (err) {
